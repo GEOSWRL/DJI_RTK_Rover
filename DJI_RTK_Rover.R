@@ -35,3 +35,22 @@ final <- df2[ , c("description", "antennaHeight(m)", "latitude", "longitude", "a
 write.csv(final, file = "xxx", row.names = FALSE)
 #write the cleaned GCP RTK points file to a GCP folder in format: "YYYMMDD_GCP_clean"
 write.csv(final, file = "xxx", row.names = FALSE)
+
+##### Firmware update revision - May 15th, 2020 - ZM #####
+# Quick additional script to reorder and rename columns to match previous .csv outputs
+#establish a filepath for the raw GCP file:
+Input <- read.csv("/Users/t38b154/Desktop/20200514_HG_GCPs_20200515043337.csv", header = TRUE, stringsAsFactors = FALSE)
+
+#establish the column names from the collected RTK data files
+Columns <- c("description", "antennaHeight(m)", "latitude", "longitude", "altitude(m)",
+             "stdLat(cm)", "stdLng(cm)", "stdAlt(cm)")
+
+#reorder columns in Input
+df1 <- Input[,c(10,6,3,4,5,7,8,9)]
+
+#rename columns of df1 to matching column names
+colnames(df1) <- Columns; head(df1)
+
+#write the cleaned GCP RTK points file to the same folder in format: "YYYMMDD_GCP_clean"
+write.csv(df1, file = "xxx", row.names = FALSE)
+         
